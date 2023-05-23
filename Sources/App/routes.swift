@@ -2,10 +2,17 @@ import Vapor
 
 func routes(_ app: Application) throws {
     app.get { req async in
-        "It works!"
+        if let peerAddress = req.peerAddress {
+            return """
+IP: \(peerAddress.ipAddress ?? "Unknown")
+Hostname: \(peerAddress.hostname ?? "Unknown")
+"""
+        } else {
+            return "Unable to determine your IP address"
+        }
     }
 
-    app.get("hello") { req async -> String in
-        "Hello, world!"
+    app.get("script") { req async -> String in
+        String(describing: req.peerAddress?.ipAddress ?? "?")
     }
 }
