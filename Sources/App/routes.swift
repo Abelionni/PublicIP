@@ -5,7 +5,6 @@ func routes(_ app: Application) throws {
         if let peerAddress = req.peerAddress {
             return """
 IP: \(peerAddress.ipAddress ?? "Unknown")
-Hostname: \(peerAddress.hostname ?? "Unknown")
 """
         } else {
             return "Unable to determine your IP address"
